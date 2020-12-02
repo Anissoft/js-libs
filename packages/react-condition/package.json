@@ -1,0 +1,38 @@
+{
+  "name": "@anissoft/react-condition",
+  "version": "1.0.0",
+  "description": "Conditional rendering for react",
+  "keywords": [
+    "react",
+    "if"
+  ],
+  "author": "Alexey <Anisimov>",
+  "homepage": "https://github.com/Anissoft/js-libs#readme",
+  "license": "MIT",
+  "main": "lib/react-condition.js",
+  "scripts": {
+    "build": "rimraf ./lib && tsc",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anissoft/js-libs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Anissoft/js-libs/issues"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "typescript": "^4.1.2"
+  }
+}
