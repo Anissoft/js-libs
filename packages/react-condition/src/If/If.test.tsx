@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cleanup, render } from "@testing-library/react";
 
-import { Else, If, Then, Condition, ElseIf, ThenIf } from "./react-condition";
+import { Else, If, Then, Condition, ElseIf, ThenIf } from "../react-condition";
 
 describe("If component", () => {
   afterEach(cleanup);
