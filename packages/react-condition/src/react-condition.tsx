@@ -89,3 +89,20 @@ export const ThenIf: React.FunctionComponent<{
     <If condition={condition}>{children}</If>
   </Then>
 );
+
+export const Condition: React.FunctionComponent<{
+  if: boolean;
+  then?: (() => JSX.Element) | JSX.Element;
+  else?: (() => JSX.Element) | JSX.Element;
+}> = ({
+  if: $if,
+  then: $then = null,
+  else: $else = null,
+}) => {
+  return (
+    <If condition={$if}>
+      <Then>{$then}</Then>
+      <Else>{$else}</Else>
+    </If>
+  )
+}
