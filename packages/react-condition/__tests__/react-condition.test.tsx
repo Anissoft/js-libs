@@ -2,7 +2,14 @@ import * as React from "react";
 
 import { cleanup, render } from "@testing-library/react";
 
-import { Else, If, Then, ElseIf, ThenIf } from "../src/react-condition";
+import {
+  Else,
+  If,
+  Then,
+  Condition,
+  ElseIf,
+  ThenIf,
+} from "../src/react-condition";
 
 describe("If component", () => {
   afterEach(cleanup);
@@ -159,5 +166,26 @@ describe("If component", () => {
     );
     expect(container1.innerHTML).toBe("Test string");
     expect(container2.innerHTML).toBe("Test string");
+  });
+
+  test("Condition should work, I guess", () => {
+    const { container: container1 } = render(
+      <Condition if={true} then={<>Test string</>} else={<>Wrong string</>} />
+    );
+    expect(container1.innerHTML).toBe("Test string");
+  });
+
+  test("Condition should render null, if then wasn't set", () => {
+    const { container: container1 } = render(
+      <Condition if={true} else={<>Wrong string</>} />
+    );
+    expect(container1.innerHTML).toBe("");
+  });
+
+  test("Condition should render null, if else wasn't set", () => {
+    const { container: container1 } = render(
+      <Condition if={false} then={<>Wrong string</>} />
+    );
+    expect(container1.innerHTML).toBe("");
   });
 });
