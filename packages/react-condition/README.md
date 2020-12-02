@@ -1,4 +1,4 @@
-# `react-condition`
+# `@anissoft/react-condition`
 
 > TODO: description
 
