@@ -2,14 +2,7 @@ import * as React from "react";
 
 import { cleanup, render } from "@testing-library/react";
 
-import {
-  Else,
-  If,
-  Then,
-  Condition,
-  ElseIf,
-  ThenIf,
-} from "../src/react-condition";
+import { Else, If, Then, Condition, ElseIf, ThenIf } from "./react-condition";
 
 describe("If component", () => {
   afterEach(cleanup);
@@ -33,9 +26,7 @@ describe("If component", () => {
     expect(container.innerHTML).toBe("Test string");
   });
   test("Render null if condition === false when children is function", () => {
-    const { container } = render(
-      <If condition={false}>{() => <>Test string</>}</If>
-    );
+    const { container } = render(<If condition={false}>{() => <>Test string</>}</If>);
     expect(container.innerHTML).toBe("");
   });
 
@@ -176,16 +167,12 @@ describe("If component", () => {
   });
 
   test("Condition should render null, if then wasn't set", () => {
-    const { container: container1 } = render(
-      <Condition if={true} else={<>Wrong string</>} />
-    );
+    const { container: container1 } = render(<Condition if={true} else={<>Wrong string</>} />);
     expect(container1.innerHTML).toBe("");
   });
 
   test("Condition should render null, if else wasn't set", () => {
-    const { container: container1 } = render(
-      <Condition if={false} then={<>Wrong string</>} />
-    );
+    const { container: container1 } = render(<Condition if={false} then={<>Wrong string</>} />);
     expect(container1.innerHTML).toBe("");
   });
 });

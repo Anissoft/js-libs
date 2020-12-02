@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build:react-condition": "npm --prefix ./packages/react-condition run build",
-    "lint": "eslint --fix 'packages/**/*.tsx' 'packages/**/*.ts' 'packages/**/*.jsx'",
+    "lint": "eslint --fix 'packages/**/*.tsx' 'packages/**/*.ts'",
     "test": "jest --coverage --env=jsdom --silent",
     "test:watch": "jest --coverage --watch --env=jsdom"
   },
