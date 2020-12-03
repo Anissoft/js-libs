@@ -15,7 +15,7 @@
   "main": "lib/react-conditions.js",
   "scripts": {
     "build": "rimraf ./lib && tsc",
-    "publish": "npm publish",
+    "prepare": "npm run build",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "directories": {
@@ -40,5 +40,5 @@
     "rimraf": "^3.0.2",
     "typescript": "^4.1.2"
   },
-  "gitHead": "c4e1b7ffa284065ce2950aa1c3298bd75cd50fba"
+  "gitHead": "b59bbc5423d2edf91747be205cfe0b199ff78819"
 }
