@@ -2,7 +2,7 @@
   "name": "@anissoft/js-libs",
   "private": true,
   "scripts": {
-    "build:react-condition": "npm --prefix ./packages/react-condition run build",
+    "build:react-conditions": "npm --prefix ./packages/react-conditions run build",
     "lint": "eslint --fix 'packages/**/*.tsx' 'packages/**/*.ts'",
     "test": "jest --coverage --env=jsdom --silent",
     "test:watch": "jest --coverage --watch --env=jsdom"

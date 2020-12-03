@@ -1,17 +1,11 @@
 import * as React from "react";
-
-function xc<T1>(arg: T1 | (() => T1)): T1 {
-  if (typeof arg === "function") {
-    return (arg as () => T1)();
-  }
-  return arg;
-}
+import { xc } from "../helpers";
 
 export const Case = ({
   children,
 }: {
   children?: (() => React.ReactNode) | React.ReactNode;
-  condition: (() => boolean) | boolean;
+  condition: (() => any) | any;
   break?: boolean;
 }): JSX.Element => {
   return (xc(children) || null) as JSX.Element;

@@ -1,11 +1,5 @@
 import React from "react";
-
-function xc<T1>(arg: T1 | (() => T1)): T1 {
-  if (typeof arg === "function") {
-    return (arg as () => T1)();
-  }
-  return arg;
-}
+import { xc } from "../helpers";
 
 export const Then = ({
   children,
@@ -31,7 +25,6 @@ export const If: React.FunctionComponent<{
   }
 
   const elseTypes = React.useMemo(() => [(<Else />).type, (<ElseIf condition={false} />).type], []);
-
   const thenTypes = React.useMemo(() => [(<Then />).type, (<ThenIf condition={false} />).type], []);
 
   if (

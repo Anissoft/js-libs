@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cleanup, render } from "@testing-library/react";
 
-import { Case, Default, Switch } from "../react-condition";
+import { Case, Default, Switch } from "../react-conditions";
 
 describe("Switch component", () => {
   afterEach(cleanup);

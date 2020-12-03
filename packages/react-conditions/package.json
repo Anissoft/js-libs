@@ -1,5 +1,5 @@
 {
-  "name": "@anissoft/react-condition",
+  "name": "@anissoft/react-conditions",
   "version": "1.0.0",
   "description": "Conditional rendering for react",
   "keywords": [
@@ -9,9 +9,10 @@
   "author": "Alexey <Anisimov>",
   "homepage": "https://github.com/Anissoft/js-libs#readme",
   "license": "MIT",
-  "main": "lib/react-condition.js",
+  "main": "lib/react-conditions.js",
   "scripts": {
     "build": "rimraf ./lib && tsc",
+    "publish": "npm publish",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "directories": {
