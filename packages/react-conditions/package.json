@@ -1,6 +1,6 @@
 {
   "name": "@anissoft/react-conditions",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Conditional rendering for react",
   "keywords": [
     "react",
