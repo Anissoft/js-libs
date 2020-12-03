@@ -8,6 +8,9 @@
   ],
   "author": "Alexey <Anisimov>",
   "homepage": "https://github.com/Anissoft/js-libs#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT",
   "main": "lib/react-conditions.js",
   "scripts": {
