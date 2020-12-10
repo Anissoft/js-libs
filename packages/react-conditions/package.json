@@ -16,7 +16,7 @@
   "scripts": {
     "build": "rimraf ./lib && tsc",
     "prepare": "npm run build",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"Use test command from root package.json\" && exit 0"
   },
   "directories": {
     "lib": "lib"

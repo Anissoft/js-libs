@@ -1,0 +1,40 @@
+{
+  "name": "@anissoft/state",
+  "version": "0.0.1",
+  "description": "Tiny and fast library for observable state management",
+  "keywords": [
+    "javascript",
+    "observable",
+    "state"
+  ],
+  "author": "Alexey <Anisimov>",
+  "homepage": "https://github.com/Anissoft/js-libs#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anissoft/js-libs.git"
+  },
+  "scripts": {
+    "build": "rimraf ./lib && tsc",
+    "prepare": "npm run build",
+    "test": "echo \"Use test command from root package.json\" && exit 0"
+  },
+  "bugs": {
+    "url": "https://github.com/Anissoft/js-libs/issues"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "typescript": "^4.1.2"
+  },
+  "dependencies": {
+    "proxy-polyfill": "^0.3.2"
+  }
+}
