@@ -19,14 +19,16 @@ export class State<T1 extends PlainObject> implements ObservableState<T1> {
   private observers: { id: symbol; observer: StateEvent<T1>; condition: Condition<T1> }[] = [];
 
   constructor(initial: T1) {
-    this.proxy = this.observe({ state: initial }, ([, ...path], value) => {
-      const oldValue = this.proxy.state;
+    const localCopy = State.merge(initial);
+
+    this.proxy = this.observe({ state: localCopy }, ([, ...path], value) => {
+      const oldValue = State.merge(this.proxy.state);
       const newValue = State.merge(oldValue, State.createPatch(path, value) as Partial<T1>);
-      this.observers.forEach(({ observer, condition }) => {
+      for (const { observer, condition } of this.observers) {
         if (condition.apply(null, [newValue, oldValue])) {
           observer.apply(null, [newValue, oldValue]);
         }
-      });
+      }
     });
   }
 
@@ -92,7 +94,9 @@ export class State<T1 extends PlainObject> implements ObservableState<T1> {
         const prevValue = accumulator[key];
         const candidateValue = candaidate[key];
 
-        if (
+        if (!prevValue && isObject(candidateValue) && !Array.isArray(candidateValue)) {
+          accumulator[key as any] = State.merge(candidateValue);
+        } else if (
           isObject(prevValue) &&
           isObject(candidateValue) &&
           !Array.isArray(prevValue) &&
