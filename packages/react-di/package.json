@@ -15,10 +15,13 @@
   },
   "license": "MIT",
   "main": "lib/react-di.js",
+  "typings": "lib/react-di",
   "scripts": {
     "build": "rimraf ./lib && tsc",
     "prepare": "npm run build",
-    "test": "echo \"Use test command from root package.json\" && exit 0"
+    "test": "jest --env=jsdom --silent",
+    "test:coverage": "npm run test -- --coverage",
+    "test:watch": "jest --watch --env=jsdom"
   },
   "directories": {
     "lib": "lib",
@@ -33,6 +36,34 @@
     "type": "git",
     "url": "git+https://github.com/Anissoft/js-libs.git"
   },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "ts-jest"
+    },
+    "testEnvironment": "jsdom",
+    "testRegex": ".*\\.(test|spec)\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 95,
+        "statements": 95
+      }
+    },
+    "collectCoverageFrom": [
+      "!**/*.test.(ts|tsx)",
+      "src/**/*"
+    ]
+  },
   "bugs": {
     "url": "https://github.com/Anissoft/js-libs/issues"
   },
@@ -43,7 +74,16 @@
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.3",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/react-hooks": "^3.2.1",
+    "@types/jest": "^26.0.16",
+    "jest": "^26.6.3",
+    "jest-config": "^25.5.3",
+    "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
+    "ts-jest": "^25.4.0",
+    "ts-node": "^8.4.1",
     "typescript": "^4.1.2"
   },
   "gitHead": "b59bbc5423d2edf91747be205cfe0b199ff78819"

@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "typeRoots":["../state-react", "node_modules/@types"],
+  "compilerOptions": {
+    "outDir": "./lib"
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "src/**/*.test.tsx"
+  ]
+}
