@@ -59,6 +59,10 @@ export class State<T1 extends PlainObject> implements ObservableState<T1> {
     };
   };
 
+  public unsubscribeAll = () => {
+    this.observers = [];
+  };
+
   private observe<T2 extends PlainObject = T1>(
     obj: T2,
     callback: (path: (string | number | symbol)[], value: any) => void
