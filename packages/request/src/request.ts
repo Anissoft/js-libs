@@ -4,17 +4,22 @@ import "./polyfill";
 export class $Request<T> {
   constructor(
     private input: RequestInfo,
+    /* istanbul ignore next */
     private init: RequestInitExtra<T> = {},
     private originalFetch: typeof fetch
-  ) {}
+  ) { }
 
   public setHeaders = (headers: Record<string, string>) => {
     Object.entries(headers).forEach(([key, value]) => {
       if (!this.init.headers) {
         this.init.headers = { [key]: value };
+        /* istanbul ignore next */
       } else if (typeof Headers !== "undefined" && this.init.headers instanceof Headers) {
+        /* istanbul ignore next */
         this.init.headers.set(key, value);
+        /* istanbul ignore next */
       } else if (Array.isArray(this.init.headers)) {
+        /* istanbul ignore next */
         this.init.headers.push([key, value]);
       } else {
         (this.init.headers as Record<string, string>)[key] = value;
@@ -43,6 +48,7 @@ export class $Request<T> {
     }
     let hasContentType = false;
     if (headers) {
+      /* istanbul ignore next */
       if (typeof Headers !== "undefined" && headers instanceof Headers) {
         hasContentType = !!headers.get("Content-Type") || !!headers.get("content-type");
       } else if (Array.isArray(headers)) {
@@ -62,7 +68,8 @@ export class $Request<T> {
     this.originalFetch(this.input, this.init as RequestInit).catch((error: Error) => {
       if (this.init.onNetworkError) {
         this.init.onNetworkError(error);
-      } else if (this.init.actions?.network) {
+      }
+      if (this.init.actions?.network) {
         this.init.actions.network(error as any);
       }
       throw error;

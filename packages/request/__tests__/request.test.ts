@@ -34,7 +34,9 @@ describe("request", () => {
           "custom-header": "some/value",
         },
       });
-      await requestWithHeaders("https://api.example.com/headers");
+      const response = await requestWithHeaders("https://api.example.com/headers");
+
+      expect(response.status).toBe(200);
       scope.done();
       end();
     });
@@ -117,6 +119,34 @@ describe("request", () => {
     end();
   });
 
+  it("should kepp body as it, if cannot stringify", async (end) => {
+    const body: Record<string, any> = {
+      username: "user",
+      password: "123qwe",
+    };
+
+    body.circular = body;
+    const spy = jest.spyOn(console, 'warn').mockImplementation();
+
+    const scope = nock("https://api.example.com")
+      .persist()
+      .post("/login", { username: /.+/, password: /.+/i, circular: /.*/ })
+      .reply(function (uri, requestBody) {
+        expect(requestBody).toEqual(body);
+        expect(this.req.headers["content-type"]).toEqual(["application/json"]);
+        return [200];
+      });
+    await request("https://api.example.com/login", {
+      method: "post",
+      body,
+    }).catch(() => null);
+    expect(spy).toBeCalledWith(
+      expect.stringMatching(/Unable to parse given body - Converting circular structure to JSON/)
+    );
+    spy.mockRestore();
+    end();
+  });
+
   describe("should call side effects accordingly actions object", () => {
     const scope = nock("https://api.example.com").persist().get("/200").reply(200);
     scope.get("/400").reply(400);
@@ -178,6 +208,28 @@ describe("request", () => {
       end();
     });
 
+    it("should exec network action if request failed with NETERROR", async (end) => {
+      const actions = {
+        "200": jest.fn(),
+        ok: jest.fn(),
+        fail: jest.fn(),
+        default: jest.fn(),
+        network: jest.fn(),
+        "400-415": jest.fn(),
+        "500,504": jest.fn(),
+      };
+
+      try {
+        await request("https://.com/400", { actions: actions });
+      } catch (e) {
+
+      }
+      expect(actions.network).toBeCalled();
+      expect(actions["400-415"]).not.toBeCalled();
+      expect(actions["500,504"]).not.toBeCalled();
+      end();
+    });
+
     it("should exec default action if no other actions was executed", async (end) => {
       const actions = {
         "200": jest.fn(),
@@ -198,4 +250,26 @@ describe("request", () => {
       scope.done();
     });
   });
+
+  describe('onNetworkError', () => {
+    const scope = nock("https://api.example.com")
+      .persist()
+      .get("/200")
+      .reply(200);
+
+    it('call onNetworkError, in case of network error', async (end) => {
+      const onNetworkError = jest.fn();
+      try {
+        await request("https://.com", { onNetworkError });
+      } catch (e) {
+
+      }
+      expect(onNetworkError).toBeCalled();
+      end();
+    });
+
+    afterAll(() => {
+      scope.done();
+    });
+  })
 });
