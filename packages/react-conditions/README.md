@@ -1,4 +1,4 @@
-# React Conditions
+# Welcome to @anissoft/react-conditions 👋
 
 Helpers for conditional rendering in React
 

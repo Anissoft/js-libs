@@ -1,4 +1,4 @@
-# @anissoft/state
+# Welcome to @anissoft/state 👋
 
 Primitive, lightweight and well typed observables.
 

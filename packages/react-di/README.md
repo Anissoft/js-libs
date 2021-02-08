@@ -1,4 +1,4 @@
-# Welcome to react-di 👋
+# Welcome to @anissoft/react-di 👋
 
 > My attempt to make inversion of control solution for React apps with Reflect metadata and Typescript;
 

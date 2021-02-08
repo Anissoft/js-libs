@@ -2,7 +2,8 @@
   "name": "@anissoft/js-libs",
   "private": true,
   "scripts": {
-    "lint": "eslint --fix 'packages/**/*.tsx' 'packages/**/*.ts'"
+    "lint": "eslint --fix 'packages/**/*.tsx' 'packages/**/*.ts'",
+    "test": "lerna run test:coverage"
   },
   "jest": {
     "transform": {

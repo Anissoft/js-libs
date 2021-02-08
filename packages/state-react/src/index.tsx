@@ -42,3 +42,4 @@ function useState<T1 extends PlainObject, T2 extends State<T1>>(
 }
 
 export default useState;
+export const useStateObject = useState;
