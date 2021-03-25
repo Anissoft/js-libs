@@ -1,11 +1,10 @@
 {
-  "name": "@anissoft/state",
-  "version": "1.0.0",
-  "description": "Tiny and fast library for observable state management",
+  "name": "@anissoft/react-hooks",
+  "version": "0.0.1",
+  "description": "Bunch of react hooks ",
   "keywords": [
-    "javascript",
-    "observable",
-    "state"
+    "react",
+    "hooks"
   ],
   "author": "Alexey <Anisimov>",
   "homepage": "https://github.com/Anissoft/js-libs#readme",
@@ -13,25 +12,29 @@
     "access": "public"
   },
   "license": "MIT",
-  "main": "lib/index.js",
-  "typings": "lib/index",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "files": [
-    "lib"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Anissoft/js-libs.git"
-  },
+  "main": "lib/react-hooks.js",
+  "typings": "lib/react-hooks",
   "scripts": {
     "build": "rimraf ./lib && tsc",
     "prepare": "npm run build",
     "test": "jest --env=jsdom --silent",
     "test:coverage": "npm run test -- --coverage",
     "test:watch": "jest --watch --env=jsdom"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib",
+    "src",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anissoft/js-libs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Anissoft/js-libs/issues"
   },
   "jest": {
     "transform": {
@@ -46,7 +49,8 @@
       "jsx"
     ],
     "coveragePathIgnorePatterns": [
-      "/node_modules/"
+      "/node_modules/",
+      "useTabFocus"
     ],
     "coverageThreshold": {
       "global": {
@@ -61,23 +65,21 @@
       "src/**/*"
     ]
   },
-  "bugs": {
-    "url": "https://github.com/Anissoft/js-libs/issues"
+  "peerDependencies": {
+    "react": "^17.0.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.3",
-    "@testing-library/react": "^11.2.2",
-    "@testing-library/react-hooks": "^3.2.1",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/react-hooks": "^3.7.0",
     "@types/jest": "^26.0.16",
     "jest": "^26.6.3",
     "jest-config": "^25.5.3",
+    "prettier": "^2.2.1",
+    "react-test-renderer": "^17.0.2",
     "rimraf": "^3.0.2",
     "ts-jest": "^25.4.0",
     "ts-node": "^8.4.1",
     "typescript": "^4.1.2"
-  },
-  "dependencies": {
-    "proxy-polyfill": "^0.3.2"
-  },
-  "gitHead": "ebf723ceca1c204afb93e1bdf65d252271dd7c15"
+  }
 }
