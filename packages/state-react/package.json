@@ -82,5 +82,6 @@
   },
   "dependencies": {
     "@anissoft/state": "^1.0.0"
-  }
+  },
+  "gitHead": "ebf723ceca1c204afb93e1bdf65d252271dd7c15"
 }

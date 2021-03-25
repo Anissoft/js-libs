@@ -27,7 +27,7 @@ function useState<T1 extends PlainObject, T2 extends State<T1>>(
   }, []);
 
   React.useEffect(() => {
-    const listener: StateEvent<T1> = (newValue, oldValue) => {
+    const listener: StateEvent<T1> = (newValue: T1, oldValue: T1) => {
       if (comparator(newValue, oldValue)) {
         update(Symbol("(ಠ_ಠ)"));
       }
