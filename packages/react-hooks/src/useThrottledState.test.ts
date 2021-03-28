@@ -1,4 +1,4 @@
-import { renderHook, cleanup } from '@testing-library/react-hooks';
+import { renderHook, cleanup, act } from '@testing-library/react-hooks';
 
 import useThrottledState from './useThrottledState';
 
@@ -13,7 +13,9 @@ describe('hook useThrottled', () => {
   test('should update value after delay', (finish) => {
     const { result } = renderHook(() => useThrottledState(0, 100));
     expect(result.current[0]).toBe(0);
-    result.current[1](v => v + 1);
+    act(() => {
+      result.current[1](v => v + 1);
+    });
     expect(result.current[0]).toBe(0);
     setTimeout(
       () => {
@@ -28,7 +30,9 @@ describe('hook useThrottled', () => {
     const { result } = renderHook(() => useThrottledState(0, 100));
     expect(result.current[0]).toBe(0);
     const interval = setInterval(() => {
-      result.current[1](v => v + 1);
+      act(() => {
+        result.current[1](v => v + 1);
+      })
     }, 10);
     setTimeout(
       () => {
