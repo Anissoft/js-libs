@@ -1,6 +1,6 @@
 {
   "name": "@anissoft/react-hooks",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Bunch of react hooks ",
   "keywords": [
     "react",
@@ -17,6 +17,7 @@
   "scripts": {
     "build": "rimraf ./lib && tsc",
     "prepare": "npm run build",
+    "prepublish": "npm run test:coverage",
     "test": "jest --env=jsdom --silent",
     "test:coverage": "npm run test -- --coverage",
     "test:watch": "jest --watch --env=jsdom"
