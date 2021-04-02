@@ -1,6 +1,6 @@
 {
   "name": "@anissoft/request",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Wrap on top of the standart fetch API with few tweaks",
   "keywords": [
     "fetch",
