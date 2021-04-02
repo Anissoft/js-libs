@@ -13,10 +13,15 @@ export const ModalsProvider = ({
   const toggleModal = React.useCallback<toggleView>((modalName, opened, props = {}) => {
     if (opened) {
       setOpenedModals(state => ({ ...state, [modalName]: props }));
-    } else if (!!openedModals[modalName]) {
-      const candidate = { ...openedModals };
-      delete candidate[modalName];
-      setOpenedModals(candidate);
+    } else {
+      setOpenedModals(opened => {
+        if (!!opened[modalName]) {
+          const candidate = { ...opened };
+          delete candidate[modalName];
+          return candidate;
+        }
+        return opened;
+      })
     }
   }, []);
 
