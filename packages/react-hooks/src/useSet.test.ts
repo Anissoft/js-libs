@@ -1,6 +1,6 @@
 import { cleanup, act, renderHook } from '@testing-library/react-hooks';
 
-import useSet from './useSet';
+import { useSet } from './useSet';
 
 describe('hook useSet', () => {
   afterEach(cleanup);
@@ -8,6 +8,11 @@ describe('hook useSet', () => {
   test('should create Set', () => {
     const { result } = renderHook(() => useSet([1, 2, 3]));
     expect(result.current).toEqual(new Set([1, 2, 3]));
+  });
+
+  test('should create empty Set if no default state provided', () => {
+    const { result } = renderHook(() => useSet());
+    expect(result.current).toEqual(new Set([]));
   });
 
   test('.add should add value to the set', () => {

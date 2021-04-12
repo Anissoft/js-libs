@@ -1,6 +1,6 @@
 {
   "name": "@anissoft/react-hooks",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Bunch of react hooks ",
   "keywords": [
     "react",
@@ -51,8 +51,9 @@
     ],
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "react-hooks",
-      "useTabFocus"
+      "/utils/",
+      "react-hooks.ts",
+      "useTabFocus.ts"
     ],
     "coverageThreshold": {
       "global": {
