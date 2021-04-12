@@ -3,7 +3,9 @@
   "private": true,
   "scripts": {
     "lint": "eslint --fix 'packages/**/*.tsx' 'packages/**/*.ts'",
-    "test": "lerna run test:coverage"
+    "test": "lerna run test:coverage",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "jest": {
     "transform": {
@@ -34,11 +36,18 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.13.14",
+    "@material-ui/core": "^4.11.3",
+    "@storybook/addon-actions": "^6.2.2",
+    "@storybook/addon-essentials": "^6.2.2",
+    "@storybook/addon-links": "^6.2.2",
+    "@storybook/react": "^6.2.2",
     "@types/jest": "^26.0.20",
     "@types/react": "^17.0.1",
     "@types/react-dom": "^17.0.1",
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "@typescript-eslint/parser": "^4.6.0",
+    "babel-loader": "^8.2.2",
     "eslint": "^7.12.1",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.1.4",
@@ -49,5 +58,6 @@
     "react-dom": "^17.0.1",
     "ts-node": "^8.4.1",
     "typescript": "^4.1.2"
-  }
+  },
+  "dependencies": {}
 }

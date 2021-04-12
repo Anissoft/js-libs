@@ -1,6 +1,6 @@
 {
   "name": "@anissoft/state-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React integration of @anissoft/state",
   "keywords": [
     "state",
@@ -14,6 +14,7 @@
   },
   "license": "MIT",
   "main": "lib/index.js",
+  "typing": "lib/index",
   "scripts": {
     "build": "rimraf ./lib && tsc",
     "prepare": "npm run build",
@@ -82,7 +83,7 @@
     "typescript": "^4.1.2"
   },
   "dependencies": {
-    "@anissoft/state": "^1.0.0"
+    "@anissoft/state": "^1.0.1"
   },
-  "gitHead": "ebf723ceca1c204afb93e1bdf65d252271dd7c15"
+  "gitHead": "30e051da6bbbf4279490b0eaf17f5f4d708ce36a"
 }

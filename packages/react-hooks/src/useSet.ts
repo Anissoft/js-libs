@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function useSet<T>(initial: T[] = []) {
+export function useSet<T>(initial: T[] = []) {
   const [state, setState] = React.useState(initial);
   return React.useMemo(() => {
     const set = new Set(state);
