@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export default function useTabFocus(
+export function useTabFocus(
   effects?: { onFocus?: React.EffectCallback; onBlur?: React.EffectCallback },
   deps: React.DependencyList = [],
 ) {
@@ -32,3 +32,5 @@ export default function useTabFocus(
 
   return focused;
 }
+
+export default useTabFocus;

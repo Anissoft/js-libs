@@ -50,3 +50,5 @@ export const useSharedState = <T extends Record<number | string | symbol, any> =
   );
   return [state, updateState] as const;
 }
+
+export default useSharedState;

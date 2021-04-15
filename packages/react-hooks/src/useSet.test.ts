@@ -1,6 +1,6 @@
 import { cleanup, act, renderHook } from '@testing-library/react-hooks';
 
-import { useSet } from './useSet';
+import useSet from './useSet';
 
 describe('hook useSet', () => {
   afterEach(cleanup);
@@ -26,6 +26,18 @@ describe('hook useSet', () => {
     expect(Array.from(result.current)).toEqual([1, 2, 3, 4]);
   });
 
+  test('.add should not trigger state update, if value already in Set', () => {
+    const { result } = renderHook(() => useSet([1, 2, 3]));
+    const first = result.current;
+
+    act(() => {
+      result.current.add(2);
+    });
+
+    const second = result.current;
+    expect(first).toBe(second);
+  });
+
   test('.delete should remove value from set', () => {
     const { result } = renderHook(() => useSet([1, 2, 3]));
 
@@ -37,6 +49,18 @@ describe('hook useSet', () => {
     expect(Array.from(result.current)).toEqual([1, 2]);
   });
 
+  test('.delete should not trigger state update, if value already was not in the Set', () => {
+    const { result } = renderHook(() => useSet([1, 2, 3]));
+    const first = result.current;
+
+    act(() => {
+      result.current.delete(4);
+    });
+
+    const second = result.current;
+    expect(first).toBe(second);
+  });
+
   test('.clear should remove all values from set', () => {
     const { result } = renderHook(() => useSet([1, 2, 3]));
 
@@ -46,5 +70,17 @@ describe('hook useSet', () => {
 
     expect(result.current.has(1)).toBeFalsy();
     expect(Array.from(result.current)).toEqual([]);
+  });
+
+  test('.clear should not trigger rerender, if Set was already empty', () => {
+    const { result } = renderHook(() => useSet([]));
+    const first = result.current;
+
+    act(() => {
+      result.current.clear();
+    });
+
+    const second = result.current;
+    expect(first).toBe(second);
   });
 });
