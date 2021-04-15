@@ -10,22 +10,31 @@ export function useSet<T>(initial: T[] = []) {
 
 
     set.add = (value: T) => {
-      const result = _add(value);
-      setState(Array.from(set));
-      return result;
+      if (!set.has(value)) {
+        _add(value);
+        setState(Array.from(set));
+      }
+      return set;
     }
 
     set.delete = (value: T) => {
-      const result = _delete(value);
-      setState(Array.from(set));
-      return result;
+      if (set.has(value)) {
+        _delete(value);
+        setState(Array.from(set));
+        return true;
+      }
+      return false;
     }
 
     set.clear = () => {
-      _clear();
-      setState([]);
+      if (set.size !== 0) {
+        _clear();
+        setState([]);
+      }
     }
 
     return set;
-  }, [initial]);
+  }, [state]);
 };
+
+export default useSet;

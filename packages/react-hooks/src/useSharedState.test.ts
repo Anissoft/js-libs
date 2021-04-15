@@ -38,6 +38,21 @@ describe('useSharedState', () => {
     expect(result.current[0]).toEqual({ ...source, ...patch1, ...patch2 });
   });
 
+  it('should accept symbol as identificator', () => {
+    const id = Symbol('source1');
+    const { result: result1 } = renderHook(() => useSharedState(id, source));
+    const { result: result2 } = renderHook(() => useSharedState(id, source));
+
+    expect(result1.current[0]).toEqual(result2.current[0]);
+
+    act(() => {
+      result1.current[1](patch1);
+    });
+
+    expect(result1.current[0]).toEqual({ ...patch1 });
+    expect(result1.current[0]).toEqual(result2.current[0]);
+  });
+
   it('should share state between calls with same id', () => {
     const { result: result1 } = renderHook(() => useSharedState('source', source));
     const { result: result2 } = renderHook(() => useSharedState('source', source));

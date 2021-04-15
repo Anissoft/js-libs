@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 
-export default function useThrottledState<T1>(initialValue: T1, delay: number) {
+export function useThrottledState<T1>(initialValue: T1, delay: number) {
   const timeouts = useRef<number[]>([]);
   const [throttledValue, setThrottledValue] = useState(initialValue);
   const lastRun = useRef(Date.now());
@@ -26,5 +26,6 @@ export default function useThrottledState<T1>(initialValue: T1, delay: number) {
     throttledValue,
     setValue,
   ] as [T1, React.Dispatch<React.SetStateAction<T1>>];
-
 };
+
+export default useThrottledState;
