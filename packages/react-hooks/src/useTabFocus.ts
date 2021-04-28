@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 export function useTabFocus(
-  effects?: { onFocus?: React.EffectCallback; onBlur?: React.EffectCallback },
+  effects?: { onFocus?: () => void; onBlur?: () => void },
   deps: React.DependencyList = [],
 ) {
   const [focused, setFocused] = React.useState(!document.hidden);
