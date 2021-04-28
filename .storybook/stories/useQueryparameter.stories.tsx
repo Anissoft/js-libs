@@ -14,7 +14,7 @@ export const Example: Story<any> = (({ }) => {
   const [test, setTest] = useQueryParameter('test', 'default-value');
 
   return (
-    <Grid item container xs={4} justify="space-between" alignItems="center">
+    <Grid item container xs={6} justify="space-between" alignItems="center">
       <Grid item><Typography>{test}</Typography></Grid>
       <Grid item><Button onClick={() => setTest(new Date().toISOString())}>change parameter</Button></Grid>
     </Grid>

@@ -60,3 +60,6 @@ export function useQueryParameter(key: string, defaultValue?: string | null) {
     },
   ] as const;
 }
+
+export const useQueryStringParameter = useQueryParameter;
+export default useQueryParameter;

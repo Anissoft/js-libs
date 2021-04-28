@@ -10,12 +10,14 @@ Just run [`npm install` command](https://docs.npmjs.com/getting-started/installi
 $ npm install @anissoft/react-hooks
 ```
 
+## React lifecycle
+
 ### - useMounted()
 
 Shortway for 'didMount' property
 
 ```js
-import * as React from 'react'
+import React from 'react'
 import If from '@anissoft/react-helpers/components/If'
 import useMounted from '@anissoft/react-hooks/useMounted'
 
@@ -53,12 +55,98 @@ export default () => {
 }
 ```
 
-### - useSharedState(key, defaultState)
+## Browser api and events 
 
-Can access state and setState method with this hook in any place at your application (by uniq id)
+### - useQueryParameter(parameterName [, defaultValue])
+
+Allows to use querystring parameter from url as State in your component.  This hook doesn't require react-router or any similar packages
 
 ```js
-import * as React from 'react';
+import React from 'react';
+import useQueryParameter from '@anissoft/react-hooks/useQueryParameter';
+
+export const Example = (({ selectedPage }) => {
+  const [test, setTest] = useQueryParameter('test', 'default-value');
+  // if parameter ?test= doesn't present in url, it will be added with provided default value
+  // otherwise, default value will be ignored, and current one will be in use
+
+  React.useEffect(() => {
+    // parameter changes in url will lead to component update
+    console.log(`Parameter 'test' was changed to ${test}`);
+  }, [test]);
+
+  
+  const [page, setPage] = useQueryParameter('page');
+  // if parameter ?page= doesn't present in url, and no default value provided 
+  // page will be equals ''
+
+  React.useEffect(() => {
+    if (page !== selectedPage) {
+      setPage(selectedPage);
+    }
+  }, [selectedPage]);
+
+  // ...
+});
+```
+
+### - useTabFocus({ onBlur, onFocus } [, deps])
+
+Will subscribe corresponding callbacks for onblur and onfocus window events (eg. if user switched tab)
+
+```js
+import React from 'react';
+import useTabFocus from '@anissoft/react-hooks/useTabFocus';
+
+const Example = () => {
+  useTabFocus({
+    onBlur: () => {
+      console.log('User has left tab');
+    },
+    onFocus: () => {
+      console.log('User opened tab back');
+    }
+  }, []);
+  // ...
+}
+```
+
+### - useKeyboard(callback [, deps])
+
+Will execute callback on keydown events with all pressed keys and keycodes at this moment
+
+```js
+import React from 'react';
+import useKeyboard from '@anissoft/react-hooks/useKeyboard';
+
+const Example = () => {
+  const [pressedKeys, setPressedKeys] = React.useState<string[]>([]);
+  const [pressedAmount, setPressedAMount] = React.useState<number>(0);
+
+  useKeyboard((keys, amount) => {
+    setPressedKeys(keys);
+    setPressedAMount(amount)
+  }, []);
+
+  return (
+    <div>
+      <p>Total key pressed: {pressedAmount}</p>
+      <ul>
+      {pressedKeys.map(key => <li>{key}</li>)}
+      </ul>
+    </div>
+  )
+}
+```
+
+## React state managemenet
+
+### - useSharedState(key, defaultState)
+
+Allows you to access state and setState method with this hook in any place at your application by uniq stateId
+
+```js
+import React from 'react';
 import { useSharedState, SharedStateProvider } from '@anissoft/react-hooks/useSharedState';
 
 import { globalStateKey, globalDefaultState } from './stateKeys'
@@ -80,15 +168,14 @@ const DeepChild = () => {
 
   // ...
 }
-
 ```
 
 ### - useSet(initialValue)
 
-Returns instance of Set, witch triggers rerender on its changes (.add, .delete and .clear methods)
+Returns instance of Set, witch triggers component update on its changes (.add, .delete and .clear methods)
 
 ```js
-import * as React from 'react'
+import React from 'react'
 import useSet from '@anissoft/react-hooks/useSet'
 
 const Example = () => {
@@ -105,7 +192,6 @@ const Example = () => {
     </>
   )
 };
-
 ```
 
 ### - useDebouncedState(value, delay)
@@ -113,7 +199,7 @@ const Example = () => {
 Debounce the [value] for [delay] (in ms)
 
 ```js
-import * as React from 'react'
+import React from 'react'
 import useDebouncedState from '@anissoft/react-hooks/useDebouncedState'
 
 const Example = ({ initial }) => {
@@ -140,7 +226,7 @@ const Example = ({ initial }) => {
 Throttle the [value] for [delay] (in ms)
 
 ```js
-import * as React from 'react'
+import React from 'react'
 import useThrottledState from '@anissoft/react-hooks/useThrottledState'
 
 export default ({ initial }) => {

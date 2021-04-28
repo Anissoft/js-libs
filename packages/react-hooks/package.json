@@ -53,7 +53,8 @@
       "/node_modules/",
       "/utils/",
       "react-hooks.ts",
-      "useTabFocus.ts"
+      "useTabFocus.ts",
+      "useQueryParameter.ts"
     ],
     "coverageThreshold": {
       "global": {
