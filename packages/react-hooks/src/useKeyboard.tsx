@@ -2,7 +2,7 @@ import React from 'react';
 
 export const useKeyboard = (
   shortcut: (presseedKeys: string[], amount: number) => void,
-  deps: React.DependencyList = []
+  deps?: React.DependencyList,
 ) => {
   const composition = React.useRef(new Set<string>([]));
   const pressedKeys = React.useRef(0);
