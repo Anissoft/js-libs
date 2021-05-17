@@ -4,3 +4,5 @@ export * from './useMounted';
 export * from './useSet';
 export * from './useTabFocus';
 export * from './useSharedState';
+export * from './useKeyboard';
+export * from './useStorage';
