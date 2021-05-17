@@ -141,7 +141,36 @@ const Example = () => {
 
 ## React state managemenet
 
-### - useSharedState(key, defaultState)
+### - useLocalStorage(key [,defaultState]) and useSessionStorage(key [,defaultState])
+
+Just like regular React.useState(), but will also sync state with corresponsing value in localStorage or sessionStorage. When value in storage will be changed somewere else in application - component will also update it's state;
+
+```js
+import React from 'react';
+import { useLocalStorage } from '@anissoft/react-hooks/useStorage';
+
+const Example = () => {
+  const [value, setValue] = useLocalStorage('key');
+
+  return <input value={value} onChange={(event) => setValue(event.target.value)}/>
+}
+```
+
+You can also specify the default value:
+
+```js
+const Example = () => {
+  const [value, setValue] = useSessionStorage('key', 'default string');
+
+  React.useEffect(() => {
+    console.log(sessionStorage.getItem('key') === 'default string'); // true
+  }, []);
+
+  // ...
+}
+```
+
+### - useSharedState(key [,defaultState])
 
 Allows you to access state and setState method with this hook in any place at your application by uniq stateId
 
