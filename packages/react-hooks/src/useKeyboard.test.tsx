@@ -1,10 +1,16 @@
 import React from 'react';
 import { fireEvent, render, act, cleanup } from "@testing-library/react";
 
-import { useKeyboard } from './useKeyboard';
+import { useKeyboard, __state } from './useKeyboard';
 
 describe('hook useKeyboard', () => {
-  afterEach(cleanup);
+  afterEach(() => {
+    cleanup();
+    __state.set({
+      composition: [],
+      pressedKeys: 0,
+    })
+  });
 
   test('should execute callback on keydown events', () => {
     const callback = jest.fn(() => undefined);

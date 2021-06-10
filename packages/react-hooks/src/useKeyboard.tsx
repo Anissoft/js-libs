@@ -1,7 +1,7 @@
 import React from 'react';
 import { ObjectWithSubscription } from './utils/objectWithSubscription';
 
-const state = new ObjectWithSubscription({
+export const __state = new ObjectWithSubscription({
   composition: [] as string[],
   pressedKeys: 0,
 });
@@ -10,27 +10,27 @@ const onKeyDown = (event: KeyboardEvent) => {
   if (event.repeat) {
     return;
   }
-  const composition = new Set(state.value.composition);
+  const composition = new Set(__state.value.composition);
   composition.add(event.code);
   composition.add(event.key);
-  state.set({
+  __state.set({
     composition: Array.from(composition),
-    pressedKeys: state.value.pressedKeys + 1,
+    pressedKeys: __state.value.pressedKeys + 1,
   });
 };
 
 const onKeyUp = (event: KeyboardEvent) => {
-  const composition = new Set(state.value.composition);
+  const composition = new Set(__state.value.composition);
   composition.delete(event.code);
   composition.delete(event.key);
-  state.set({
+  __state.set({
     composition: Array.from(composition),
-    pressedKeys: state.value.pressedKeys > 0 ? state.value.pressedKeys - 1 : 0,
+    pressedKeys: __state.value.pressedKeys > 0 ? __state.value.pressedKeys - 1 : 0,
   });
 };
 
 const clear = () => {
-  state.set({
+  __state.set({
     composition: [],
     pressedKeys: 0
   });
@@ -48,7 +48,7 @@ export const useKeyboard = (
   deps?: React.DependencyList,
 ) => {
   React.useEffect(() => {
-    const { unsubscribe } = state.subscribe(({ pressedKeys, composition }) => {
+    const { unsubscribe } = __state.subscribe(({ pressedKeys, composition }) => {
       shortcut(composition, pressedKeys)
     });
     return () => {
