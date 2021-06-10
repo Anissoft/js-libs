@@ -5,7 +5,8 @@
     "lint": "eslint --fix 'packages/**/*.tsx' 'packages/**/*.ts'",
     "test": "lerna run test:coverage",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "lerna": "lerna"
   },
   "jest": {
     "transform": {

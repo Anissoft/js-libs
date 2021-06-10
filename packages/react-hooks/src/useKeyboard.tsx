@@ -1,48 +1,58 @@
 import React from 'react';
+import { ObjectWithSubscription } from './utils/objectWithSubscription';
+
+const state = new ObjectWithSubscription({
+  composition: [] as string[],
+  pressedKeys: 0,
+});
+
+const onKeyDown = (event: KeyboardEvent) => {
+  if (event.repeat) {
+    return;
+  }
+  const composition = new Set(state.value.composition);
+  composition.add(event.code);
+  composition.add(event.key);
+  state.set({
+    composition: Array.from(composition),
+    pressedKeys: state.value.pressedKeys + 1,
+  });
+};
+
+const onKeyUp = (event: KeyboardEvent) => {
+  const composition = new Set(state.value.composition);
+  composition.delete(event.code);
+  composition.delete(event.key);
+  state.set({
+    composition: Array.from(composition),
+    pressedKeys: state.value.pressedKeys > 0 ? state.value.pressedKeys - 1 : 0,
+  });
+};
+
+const clear = () => {
+  state.set({
+    composition: [],
+    pressedKeys: 0
+  });
+}
+
+document.addEventListener('keydown', onKeyDown);
+document.addEventListener('keyup', onKeyUp);
+document.addEventListener('blur', clear);
+// document.addEventListener('focusin', clear);
+document.addEventListener('focus', clear);
+// document.addEventListener('pointerout', clear);
 
 export const useKeyboard = (
-  shortcut: (presseedKeys: string[], amount: number) => void,
+  shortcut: (composition: string[], pressedKeys: number) => void,
   deps?: React.DependencyList,
 ) => {
-  const composition = React.useRef(new Set<string>([]));
-  const pressedKeys = React.useRef(0);
-
   React.useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.repeat) {
-        return;
-      }
-      composition.current.add(event.code);
-      composition.current.add(event.key);
-      pressedKeys.current = pressedKeys.current + 1;
-      shortcut(Array.from(composition.current), pressedKeys.current);
-    };
-
-    const onKeyUp = (event: KeyboardEvent) => {
-      composition.current.delete(event.code);
-      composition.current.delete(event.key);
-      pressedKeys.current = pressedKeys.current > 0 ? pressedKeys.current - 1 : 0;
-      shortcut(Array.from(composition.current), pressedKeys.current);
-    };
-
-    const clear = () => {
-      composition.current.clear();
-      pressedKeys.current = 0;
-      shortcut(Array.from(composition.current), pressedKeys.current);
-    }
-
-    document.addEventListener('keydown', onKeyDown);
-    document.addEventListener('keyup', onKeyUp);
-    document.addEventListener('blur', clear);
-    document.addEventListener('focusin', clear);
-    document.addEventListener('pointerout', clear);
-
+    const { unsubscribe } = state.subscribe(({ pressedKeys, composition }) => {
+      shortcut(composition, pressedKeys)
+    });
     return () => {
-      document.removeEventListener('keydown', onKeyDown);
-      document.removeEventListener('keyup', onKeyUp);
-      document.removeEventListener('blur', clear);
-      document.removeEventListener('focusin', clear);
-      document.removeEventListener('pointerout', clear);
+      unsubscribe();
     };
   }, deps);
 };
