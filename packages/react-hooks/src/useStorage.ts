@@ -58,7 +58,7 @@ export function useStorage(storageType: keyof typeof storages, key: string, defa
   ref.current = value;
 
   React.useEffect(() => {
-    const valueFromStorage = storages[storageType].getItem('key');
+    const valueFromStorage = storages[storageType].getItem(key);
     if (typeof defaultValue !== 'undefined' && !valueFromStorage && valueFromStorage !== '') {
       storages[storageType].setItem(key, defaultValue);
     }
