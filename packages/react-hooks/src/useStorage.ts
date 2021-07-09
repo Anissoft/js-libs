@@ -52,7 +52,8 @@ Storage.prototype.clear = function () {
 };
 
 export function useStorage(storageType: keyof typeof storages, key: string, defaultValue?: string) {
-  const [value, setValue] = React.useState(storages[storageType].getItem(key));
+  const valueInStorage = storages[storageType].getItem(key);
+  const [value, setValue] = React.useState(valueInStorage === null && defaultValue !== undefined ? defaultValue : valueInStorage);
   const ref = React.useRef(value);
 
   ref.current = value;
