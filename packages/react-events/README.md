@@ -5,7 +5,7 @@
 ## Usage
 
 ```
-const reactEvents = require('react-events');
+import reactEvents from '@anissoft/react-events';
 
 // TODO: DEMONSTRATE API
 ```
