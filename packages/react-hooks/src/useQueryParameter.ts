@@ -16,23 +16,23 @@ export const patchQueryString = (search: string, patch: Record<string, string | 
 export const updateQueryString = (patch: Record<string, string | null | undefined>) => {
   const search = patchQueryString(window.location.search, patch);
   const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${search}`;
-  window.history.pushState({ path: newurl }, '', newurl);
+  window.history.replaceState({ path: newurl }, '', newurl);
 }
 
 export function useQueryParameter(key: string, defaultValue?: string | null) {
   const [value, setValue] = React.useState(new URLSearchParams(window.location.search).get(key) || defaultValue);
 
   React.useEffect(() => {
-    const pushState = window.history.pushState;
-    window.history.pushState = function (state, title, url) {
+    const replaceState = window.history.replaceState;
+    window.history.replaceState = function (state, title, url) {
       if (url) {
         setValue(new URLSearchParams(url.split('?')[1]).get(key));
       }
-      return pushState.apply(history, [state, title, url]);
+      return replaceState.apply(history, [state, title, url]);
     };
 
     return () => {
-      window.history.pushState = pushState;
+      window.history.replaceState = replaceState;
     }
   }, []);
 
