@@ -16,7 +16,7 @@ export const patchQueryString = (search: string, patch: Record<string, string | 
 export const updateQueryString = (patch: Record<string, string | null | undefined>) => {
   const search = patchQueryString(window.location.search, patch);
   const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${search}`;
-  window.history.pushState({ path: newurl }, '', newurl);
+  window.history.replaceState({ path: newurl }, '', newurl);
 }
 
 export function useQueryParameter(key: string, defaultValue?: string | null) {

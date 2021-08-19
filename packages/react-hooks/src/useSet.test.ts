@@ -26,6 +26,17 @@ describe('hook useSet', () => {
     expect(Array.from(result.current)).toEqual([1, 2, 3, 4]);
   });
 
+  test('should not change reference between updates', () => {
+    const { result } = renderHook(() => useSet());
+    const initialRef = result.current;
+    act(() => {
+      result.current.add(1);
+    });
+
+    expect(result.current.has(1)).toBeTruthy();
+    expect(result.current).toBe(initialRef);
+  });
+
   test('.add should not trigger state update, if value already in Set', () => {
     const { result } = renderHook(() => useSet([1, 2, 3]));
     const first = result.current;

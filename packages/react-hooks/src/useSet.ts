@@ -1,9 +1,9 @@
 import React from 'react';
 
 export function useSet<T>(initial: T[] = []) {
-  const [state, setState] = React.useState(initial);
+  const [state, setState] = React.useState(Symbol('initial'));
   return React.useMemo(() => {
-    const set = new Set(state);
+    const set = new Set(initial);
     const _add = set.add.bind(set);
     const _delete = set.delete.bind(set);
     const _clear = set.clear.bind(set);
@@ -12,7 +12,7 @@ export function useSet<T>(initial: T[] = []) {
     set.add = (value: T) => {
       if (!set.has(value)) {
         _add(value);
-        setState(Array.from(set));
+        setState(Symbol('add'));
       }
       return set;
     }
@@ -20,7 +20,7 @@ export function useSet<T>(initial: T[] = []) {
     set.delete = (value: T) => {
       if (set.has(value)) {
         _delete(value);
-        setState(Array.from(set));
+        setState(Symbol('delete'));
         return true;
       }
       return false;
@@ -29,12 +29,12 @@ export function useSet<T>(initial: T[] = []) {
     set.clear = () => {
       if (set.size !== 0) {
         _clear();
-        setState([]);
+        setState(Symbol('clear'));
       }
     }
 
     return set;
-  }, [state]);
+  }, []);
 };
 
 export default useSet;
