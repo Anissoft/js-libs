@@ -26,11 +26,11 @@ function Countdown(props: { start: number }) {
           if ( state.timeLeft === 0) {
             clearInterval(interval);
           } else {
-           state.timeLeft = state.timeLeft - 1;
+           state.value.timeLeft = state.value.timeLeft - 1;
           }
         },
         1000,
-      ); 
+      );
 
       return () => clearInterval(interval);
     [],
@@ -38,65 +38,55 @@ function Countdown(props: { start: number }) {
 
   return (
     <div>
-      <span>Seconds left {state.timeLeft}</span>
+      <span>Seconds left {state.value.timeLeft}</span>
     </div>
   )
 }
 ```
 
-``useStateObject`` can accept already created State object as agrument:
+`useStateObject` can accept already created State object as agrument:
 
 ```tsx
-import * as React from 'react';
-import { useStateObject } from '@anissoft/state-react';
+import * as React from "react";
+import { useStateObject } from "@anissoft/state-react";
 
-import myState from 'Models/state';
+import myState from "Models/state";
 
 function Component() {
   const state = useStateObject(myState);
-  
+
   React.useEffect(() => {
     return myState.subscrube(() => {
       /* ... */
-    })
+    });
   }, []);
 
-  return (
-    <div>
-      {/* ... */}
-    </div>
-  )
+  return <div>{/* ... */}</div>;
 }
 ```
 
 You can pass comparator as second argument, to specify condition when hook should initiate component rerender:
 
 ```tsx
-import * as React from 'react';
-import { useStateObject } from '@anissoft/state-react';
+import * as React from "react";
+import { useStateObject } from "@anissoft/state-react";
 
 function Countdown({ timeout }: { timeout: number }) {
   const state = useuseStateObjectBox({ timeLeft: timeout }, (newValue) => newValue.timeLeft >= 0);
 
-  React.useEffect(
-    () => {
-      const interval = setInterval(
-        () => {
-          newValue.timeLeft = newValue.timeLeft - 1;
-        },
-        1000,
-      ); 
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      state.value.timeLeft = state.value.timeLeft - 1;
+    }, 1000);
 
-      return () => clearInterval(interval);
-    },
-    [],
-  );
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div>
-      <span>{`Seconds left ${state.timeLeft}`}</span>
+      <span>{`Seconds left ${state.value.timeLeft}`}</span>
     </div>
-  )
+  );
 }
 ```
 

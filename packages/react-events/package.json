@@ -1,0 +1,86 @@
+{
+  "name": "react-events",
+  "version": "0.0.1",
+  "description": "Easy to use event emitters and listeners",
+  "keywords": [
+    "react",
+    "events"
+  ],
+  "author": "alexey anisimov <anissoftkun@gmail.com>",
+  "homepage": "https://github.com/Anissoft/js-libs#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "ISC",
+  "main": "lib/react-events.js",
+  "typings": "lib/react-events",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib",
+    "src",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anissoft/js-libs.git"
+  },
+  "scripts": {
+    "build": "rimraf ./lib && tsc",
+    "prepare": "npm run build",
+    "prepublish": "npm run test:coverage",
+    "test": "jest --env=jsdom",
+    "test:coverage": "npm run test -- --coverage",
+    "test:watch": "jest --watch --env=jsdom"
+  },
+  "bugs": {
+    "url": "https://github.com/Anissoft/js-libs/issues"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "ts-jest"
+    },
+    "testEnvironment": "jsdom",
+    "testRegex": ".*\\.(test|spec)\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "polyfill.ts"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    },
+    "collectCoverageFrom": [
+      "!**/*.test.(ts|tsx)",
+      "src/**/*"
+    ]
+  },
+  "peerDependencies": {
+    "react": "^17.0.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.3",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/react-hooks": "^3.7.0",
+    "@types/jest": "^26.0.16",
+    "jest": "26.6.3",
+    "jest-config": "26.6.3",
+    "prettier": "^2.2.1",
+    "react-test-renderer": "^17.0.2",
+    "rimraf": "^3.0.2",
+    "ts-jest": "26.5.6",
+    "ts-node": "9.1.1",
+    "typescript": "4.2.4"
+  }
+}
