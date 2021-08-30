@@ -50,14 +50,15 @@
       "jsx"
     ],
     "coveragePathIgnorePatterns": [
-      "/node_modules/"
+      "/node_modules/",
+      "polyfill.ts"
     ],
     "coverageThreshold": {
       "global": {
         "branches": 90,
         "functions": 90,
-        "lines": 95,
-        "statements": 95
+        "lines": 90,
+        "statements": 90
       }
     },
     "collectCoverageFrom": [
@@ -70,7 +71,7 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.3",
-    "@testing-library/react": "^11.2.5",
+    "@testing-library/react": "^11.2.7",
     "@testing-library/react-hooks": "^3.7.0",
     "@types/jest": "^26.0.16",
     "jest": "26.6.3",

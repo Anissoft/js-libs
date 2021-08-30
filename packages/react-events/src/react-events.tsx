@@ -1,108 +1,111 @@
 import React from 'react';
 
-type CustomReactEvent = string;
-type CustomReactEventListener<T = any> = (event: T) => void;
+export type CustomEventName = string;
+export type CustomEventListener<T = any> = (event: T) => (void | boolean);
 
-const eventsContext = React.createContext<{
-  events: Record<CustomReactEvent, CustomReactEventListener[]>;
-  setEvents: React.Dispatch<React.SetStateAction<Record<string, CustomReactEventListener[]>>>,
-}>({
-  events: {},
-  setEvents: () => undefined,
-});
-const dispatchDefault = () => undefined;
-const dispatchContext = React.createContext<(event: CustomReactEvent, payload: any) => void>(dispatchDefault);
-const dispatchGlobal: Set<(event: CustomReactEvent, payload: any) => void> = new Set();
+const globalEvents: Record<CustomEventName, Set<CustomEventListener>> = {};
+
+export const removeGlobalEventListener = (event: CustomEventName, listener: CustomEventListener) => {
+  globalEvents[event]?.delete(listener);
+}
+
+export const addGlobalEventListener = (event: CustomEventName, listener: CustomEventListener) => {
+  if (!globalEvents[event]) {
+    globalEvents[event] = new Set();
+  }
+  globalEvents[event].add(listener);
+
+  return () => removeGlobalEventListener(event, listener);
+}
+export const dispatchGlobalEvent = (event: CustomEventName, payload: any) => {
+  if (globalEvents[event]) {
+    globalEvents[event].forEach(listener => {
+      try {
+        listener(payload);
+      } catch (error) {
+        /* istanbul ignore next */
+        console.error(error);
+      }
+    })
+  }
+}
+
+const addListenerContext = React.createContext(addGlobalEventListener);
+const dispatchContext = React.createContext(dispatchGlobalEvent);
 
 export const CustomEventScope = ({
-  stopPropagation = false, // do not call listeners for event in the parent scope, if listeners were called inside current one
-  isolate = false, // do not call listeners for event in the parent scope at all
-  children
-}: React.PropsWithChildren<{ stopPropagation?: boolean; isolate?: boolean }>) => {
-  const propagate = React.useContext(dispatchContext);
-  const [events, setEvents] = React.useState<Record<CustomReactEvent, CustomReactEventListener[]>>({});
+  isolate = false,
+  children,
+}: React.PropsWithChildren<{ isolate?: boolean }>) => {
+  const bubbleUp = React.useContext(dispatchContext);
+  const [events, setEvents] = React.useState<Record<CustomEventName, Set<CustomEventListener>>>({});
 
-  const dispatch = React.useCallback((event: CustomReactEvent, payload: any) => {
+  const dispatch = React.useCallback((event: CustomEventName, payload: any) => {
+    let preventBubbleUp = false;
     if (events[event]) {
       events[event].forEach(listener => {
         try {
-          listener(payload);
+          preventBubbleUp = !!listener(payload) || preventBubbleUp;
         } catch (error) {
+          /* istanbul ignore next */
           console.error(error);
         }
       });
-      if (!stopPropagation && !isolate) {
-        propagate(event, payload);
-      }
-    } else if (!isolate) {
-      propagate(event, payload);
     }
-  }, [events, propagate, stopPropagation]);
-
-  React.useEffect(() => {
-    if (propagate === dispatchDefault && !isolate) {
-      dispatchGlobal.add(dispatch);
-      return () => {
-        dispatchGlobal.delete(dispatch);
-      }
+    if (!isolate && !preventBubbleUp) {
+      bubbleUp(event, payload);
     }
-  }, [propagate, dispatch, isolate]);
+  }, [events, bubbleUp, isolate]);
 
-  return (
-    <eventsContext.Provider value={{ events, setEvents }}>
-      <dispatchContext.Provider value={dispatch}>
-        {children}
-      </dispatchContext.Provider>
-    </eventsContext.Provider>
-  );
-}
-
-export const useAddCustomEventListener = () => {
-  const currentScope = React.useContext(eventsContext);
-  return React.useCallback(function <T = undefined>(event: CustomReactEvent, listener: CustomReactEventListener<T>) {
-    currentScope.setEvents(events => {
+  const addListener = React.useCallback(function <T = any>(event: CustomEventName, listener: CustomEventListener<T>) {
+    setEvents(events => {
       const localCopy = { ...events };
       if (!localCopy[event]) {
-        localCopy[event] = [];
+        localCopy[event] = new Set();
       }
-      localCopy[event].push(listener)
+      localCopy[event].add(listener);
       return localCopy;
     });
 
     return () => {
-      currentScope.setEvents(events => {
+      setEvents(events => {
         const localCopy = { ...events };
-        const listeners = new Set(localCopy[event]);
-        listeners.delete(listener);
-        if (listeners.size === 0) {
+        if (localCopy[event]) {
+          localCopy[event].delete(listener);
+        }
+        if (localCopy[event].size === 0) {
           delete localCopy[event];
-        } else {
-          localCopy[event] = Array.from(listeners);
         }
         return localCopy;
       });
-    }
-  }, []);
+    };
+  }, [setEvents]);
+
+  return (
+    <addListenerContext.Provider value={addListener}>
+      <dispatchContext.Provider value={dispatch}>
+        {children}
+      </dispatchContext.Provider>
+    </addListenerContext.Provider>
+  );
 }
 
-export function useCustomEventListener<T = undefined>(event: CustomReactEvent, listener: CustomReactEventListener<T>) {
-  const addCustomEventListener = useAddCustomEventListener()
+export const useAddCustomEventListener = () => {
+  return React.useContext(addListenerContext);
+}
+
+export function useCustomEventListener<T = any>(
+  event: CustomEventName,
+  listener: CustomEventListener<T>,
+  deps: React.DependencyList | undefined = [],
+) {
+  const addCustomEventListener = useAddCustomEventListener();
 
   React.useEffect(() => {
     return addCustomEventListener(event, listener);
-  }, [event, listener]);
+  }, [event, addCustomEventListener, ...deps]);
 }
 
 export const useDispatchCustomEvent = () => {
   return React.useContext(dispatchContext);
-}
-
-export const dispatchGlobalCustomEvent = (event: CustomReactEvent, paylaod: any) => {
-  dispatchGlobal.forEach(dispatch => {
-    try {
-      dispatch(event, paylaod);
-    } catch (error) {
-      console.error(error);
-    }
-  })
 }

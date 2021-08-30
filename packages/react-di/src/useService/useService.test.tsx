@@ -17,7 +17,7 @@ class Dependency {
 
 @Service()
 class Master {
-  constructor(@Inject(tags.dependency) public dependency: Dependency) {}
+  constructor(@Inject(tags.dependency) public dependency: Dependency) { }
 }
 
 describe("useService", () => {

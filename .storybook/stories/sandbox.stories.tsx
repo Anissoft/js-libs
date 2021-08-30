@@ -1,46 +1,48 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
-import Grid from '@material-ui/core/Grid';
-// import { Typography } from '@material-ui/core';
+import { Meta, Story } from '@storybook/react';
 
-import { CustomEventScope, useAddCustomEventListener, useCustomEventListener } from '../../packages/react-events/src/react-events'
+import {
+  CustomEventScope,
+  addGlobalEventListener,
+  dispatchGlobalEvent,
+  useCustomEventListener,
+  useDispatchCustomEvent
+} from '../../packages/react-events/src/react-events'
 
 export default {
   title: 'sandbox',
 } as Meta;
 
-const Child2 = ({ event }: { event: string }) => {
-  const subscribe = useAddCustomEventListener();
+const Child2 = ({ name }: { name: string }) => {
+  // useCustomEventListener('global_click', (evt) => console.log({ got: name, evt }));
+  useCustomEventListener('event', (evt) => console.log(`${name} got "event" event`, evt));
+  const dispatchCustomEvent = useDispatchCustomEvent();
 
-  React.useEffect(() => {
-    if (event === 'second2') {
-      const unsubscribe = subscribe(event, console.log);
-      setTimeout(unsubscribe, 5000);
-    }
-  }, []);
-
-  return (<button>Click me</button>)
-}
-
-const Child1 = ({ children, name }: React.PropsWithChildren<{ name: string }>) => {
-  return (
-    <CustomEventScope>
-      <Grid item container xs={12} justify="flex-start" alignItems="center" spacing={2}>
-        {children}
-      </Grid>
-    </CustomEventScope>
-  )
+  return (<div>
+    <button onClick={(event) => dispatchCustomEvent('event', { from: name })}>Dispatch event from "{name}" click</button>
+  </div>)
 }
 
 export const Parent1: Story<any> = (({ }) => {
+  React.useEffect(() => {
+    console.log({ dispatchGlobalEvent, addGlobalEventListener })
+  }, []);
+
   return (
-    <CustomEventScope>
-      <Child2 event={'first'} />
-      <Child1 name={'2'} >
-        <Child2 event={'second'} />
-        <Child2 event={'second2'} />
-      </Child1>
-    </CustomEventScope>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <CustomEventScope >
+        <Child2 name={'top'} />
+        <CustomEventScope >
+          <Child2 name={'second'} />
+          <CustomEventScope >
+            <Child2 name={'third'} />
+            <CustomEventScope isolate>
+              <Child2 name={'forth'} />
+            </CustomEventScope>
+          </CustomEventScope>
+        </CustomEventScope>
+      </CustomEventScope>
+    </div>
   );
 }).bind({});
 
