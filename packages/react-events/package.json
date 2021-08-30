@@ -1,5 +1,5 @@
 {
-  "name": "react-events",
+  "name": "@anissoft/react-events",
   "version": "0.0.1",
   "description": "Easy to use event emitters and listeners",
   "keywords": [
