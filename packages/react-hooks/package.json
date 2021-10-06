@@ -54,6 +54,7 @@
       "/utils/",
       "react-hooks.ts",
       "useTabFocus.ts",
+      "useViewportSize.ts",
       "useQueryParameter.ts"
     ],
     "coverageThreshold": {
