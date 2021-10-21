@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export function useMounted() {
   const [mounted, setMounted] = useState(false);
@@ -13,7 +13,7 @@ export function useMounted() {
     [],
   );
 
-  return { mounted, isMounted: () => !unmounted.current };
+  return React.useMemo(() => ({ mounted, isMounted: () => !unmounted.current }), [mounted, unmounted]);
 };
 
 export default useMounted;

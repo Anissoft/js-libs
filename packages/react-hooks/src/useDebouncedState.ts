@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 export function useDebounced<T1>(initialValue: T1, delay: number) {
   const timeout = useRef<number>();
@@ -15,14 +15,18 @@ export function useDebounced<T1>(initialValue: T1, delay: number) {
       },
       delay,
     ) as unknown as number;
-  }, [delay]);
+  }, [delay, setDebouncedValue]);
 
   useEffect(() => () => clearTimeout(timeout.current), []);
 
-  return [
-    debouncedValue,
-    setValue,
-  ] as [T1, React.Dispatch<React.SetStateAction<T1>>];
+  return React.useMemo(
+    () => [
+      debouncedValue,
+      setValue,
+    ] as [T1, React.Dispatch<React.SetStateAction<T1>>],
+    [debouncedValue, setValue],
+  );
 };
 
 export default useDebounced;
+export const useDebouncedState = useDebounced;

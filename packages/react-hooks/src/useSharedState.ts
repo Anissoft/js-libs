@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { ObjectWithSubscription } from './utils/objectWithSubscription';
 
 export type ContainerState = Record<number | string | symbol, any>;
@@ -48,7 +49,7 @@ export const useSharedState = <T extends Record<number | string | symbol, any> =
     }),
     [key, state, setState],
   );
-  return [state, updateState] as const;
+  return React.useMemo(() => [state, updateState] as const, [state, updateState]);
 }
 
 export default useSharedState;

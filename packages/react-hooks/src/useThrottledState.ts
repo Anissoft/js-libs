@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 export function useThrottledState<T1>(initialValue: T1, delay: number) {
   const timeouts = useRef<number[]>([]);
@@ -22,10 +22,13 @@ export function useThrottledState<T1>(initialValue: T1, delay: number) {
     timeouts.current.forEach(timeout => clearTimeout(timeout));
   }, []);
 
-  return [
-    throttledValue,
-    setValue,
-  ] as [T1, React.Dispatch<React.SetStateAction<T1>>];
+  return React.useMemo(
+    () => [
+      throttledValue,
+      setValue,
+    ] as [T1, React.Dispatch<React.SetStateAction<T1>>],
+    [throttledValue, setValue],
+  );
 };
 
 export default useThrottledState;

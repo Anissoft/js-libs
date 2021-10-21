@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { ObjectWithSubscription } from './utils/objectWithSubscription';
 
 const setItem = Storage.prototype.setItem;
@@ -90,12 +91,15 @@ export function useStorage(storageType: keyof typeof storages, key: string, defa
     }
   }, [key, value]);
 
-  return [
-    value,
-    (newValue: string | ((state: string | null) => string)) => {
-      storages[storageType].setItem(key, typeof newValue === 'function' ? newValue(value) : newValue);
-    },
-  ] as [string | null, React.Dispatch<React.SetStateAction<string | null>>];
+  return React.useMemo(
+    () => [
+      value,
+      (newValue: string | ((state: string | null) => string)) => {
+        storages[storageType].setItem(key, typeof newValue === 'function' ? newValue(value) : newValue);
+      },
+    ] as [string | null, React.Dispatch<React.SetStateAction<string | null>>],
+    [value],
+  );
 }
 
 export const useLocalStorage = useStorage.bind(null, 'local');

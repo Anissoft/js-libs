@@ -26,7 +26,7 @@ export function useQueryParameter(key: string, defaultValue?: string | null) {
     const replaceState = window.history.replaceState;
     window.history.replaceState = function (state, title, url) {
       if (url) {
-        setValue(new URLSearchParams(url.split('?')[1]).get(key));
+        setValue(new URLSearchParams(url.toString().split('?')[1]).get(key));
       }
       return replaceState.apply(history, [state, title, url]);
     };
@@ -51,14 +51,14 @@ export function useQueryParameter(key: string, defaultValue?: string | null) {
     }
   }, []);
 
-  return [
+  return React.useMemo(() => [
     value,
     (newValue: string | null) => {
       if (new URLSearchParams(window.location.search).get(key) !== newValue) {
         updateQueryString({ [key]: newValue })
       }
     },
-  ] as const;
+  ] as const, [value]);
 }
 
 export const useQueryStringParameter = useQueryParameter;
