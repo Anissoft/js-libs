@@ -10,7 +10,7 @@ import {
 } from '../../packages/react-events/src/react-events'
 
 export default {
-  title: 'sandbox',
+  title: 'events',
 } as Meta;
 
 const Child2 = ({ name }: { name: string }) => {

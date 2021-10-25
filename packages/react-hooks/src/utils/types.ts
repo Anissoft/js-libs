@@ -1,4 +1,3 @@
-
 type Primitive =
   | bigint
   | boolean
