@@ -12,7 +12,7 @@ $ npm install @anissoft/react-hooks
 
 ## React lifecycle
 
-### - [useMounted()](react-hooks/src/useMounted.ts)
+### - [useMounted()](src/useMounted.ts)
 
 Shortway for 'didMount' property
 
@@ -51,7 +51,7 @@ export default () => {
 
 ## Browser api and events
 
-### - [useQueryParameter(parameterName [, defaultValue]) and useQueryParameters()](react-hooks/src/useQueryParameters.ts)
+### - [useQueryParameter(parameterName [, defaultValue]) and useQueryParameters()](src/useQueryParameters.ts)
 
 Allows to use querystring parameter from url as State in your component. This hook doesn't require react-router or any other packages for routing
 
@@ -122,7 +122,7 @@ setTest("value", "replace"); //[default] updates url with replaceState
 setParam("test", "value", "replace");
 ```
 
-### - [useDocumentCookie(name [,defaultValue [,defaultOptions]]) and useDocumentCookies()](<(react-hooks/src/useDocumentCookies.ts)>)
+### - [useDocumentCookie(name [,defaultValue [,defaultOptions]]) and useDocumentCookies()](<(src/useDocumentCookies.ts)>)
 
 Allows to use document cookies as react state
 
@@ -159,7 +159,7 @@ updateTestCookie(null);
 setCookie("name", null);
 ```
 
-### - [useTabFocus({ onBlur, onFocus } [, deps])](react-hooks/src/useTabFocus.ts)
+### - [useTabFocus({ onBlur, onFocus } [, deps])](src/useTabFocus.ts)
 
 Will subscribe corresponding callbacks for onblur and onfocus window events (eg. if user switched tab)
 
@@ -183,7 +183,7 @@ const Example = () => {
 };
 ```
 
-### - [useKeyboard(callback [, deps])](react-hooks/src/useKeyboard.ts)
+### - [useKeyboard(callback [, deps])](src/useKeyboard.ts)
 
 Will execute callback on keydown events with all pressed keys and keycodes at this moment
 
@@ -213,7 +213,7 @@ const Example = () => {
 
 ## React state managemenet
 
-### - [useLocalStorage(key [,defaultState]) and useSessionStorage(key [,defaultState])](react-hooks/src/useStorage.ts)
+### - [useLocalStorage(key [,defaultState]) and useSessionStorage(key [,defaultState])](src/useStorage.ts)
 
 Just like regular React.useState(), but will also sync state with corresponsing value in localStorage or sessionStorage. When value in storage will be changed somewere else in application - component will also update it's state;
 
@@ -242,7 +242,7 @@ const Example = () => {
 };
 ```
 
-### - [useSharedState(key [,defaultState])](react-hooks/src/useSharedState.ts)
+### - [useSharedState(key [,defaultState])](src/useSharedState.ts)
 
 Allows you to access state and setState method with this hook in any place at your application by uniq stateId
 
@@ -271,7 +271,7 @@ const DeepChild = () => {
 };
 ```
 
-### - [useSet(initialValue)](react-hooks/src/useSet.ts)
+### - [useSet(initialValue)](src/useSet.ts)
 
 Returns instance of Set, witch triggers component update on its changes (.add, .delete and .clear methods)
 
@@ -295,7 +295,7 @@ const Example = () => {
 };
 ```
 
-### - [useDebouncedState(value, delay)](react-hooks/src/useDebouncedState.ts)
+### - [useDebouncedState(value, delay)](src/useDebouncedState.ts)
 
 Debounce the [value] for [delay] (in ms)
 
@@ -322,7 +322,7 @@ const Example = ({ initial }) => {
 };
 ```
 
-### - [useThrottledState(value, delay)](react-hooks/src/useThrottledState.ts)
+### - [useThrottledState(value, delay)](src/useThrottledState.ts)
 
 Throttle the [value] for [delay] (in ms)
 
