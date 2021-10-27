@@ -94,7 +94,7 @@ export function useDocumentCookie(name: string, defaultValue?: string, defaultOp
     if (cookies.value[name] === undefined && defaultValue) {
       updateCookie(name, defaultValue, defaultOptions);
     }
-  }, []);
+  }, [name]);
 
   React.useEffect(() => {
     const { unsubscribe } = cookies.subscribe((newState) => {
@@ -106,7 +106,7 @@ export function useDocumentCookie(name: string, defaultValue?: string, defaultOp
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [name, state]);
 
   return React.useMemo(() => [
     state,

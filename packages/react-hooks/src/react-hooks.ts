@@ -6,4 +6,4 @@ export * from './useTabFocus';
 export * from './useSharedState';
 export * from './useKeyboard';
 export * from './useStorage';
-export * from './useQueryParameter';
+export * from './useQueryParameters';
