@@ -50,7 +50,7 @@ export const updateQueryString = (
   });
 
   const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${query.toString()}`.replace(/\?$/, '');
-  window.history[`${method}State`]({ path: newurl }, '', newurl);
+  ((window.history as any)[`${method}State`] as typeof window.history.pushState | typeof window.history.replaceState)({ path: newurl }, '', newurl);
 };
 
 export function useQueryParameters() {

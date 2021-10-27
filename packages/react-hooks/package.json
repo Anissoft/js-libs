@@ -1,6 +1,6 @@
 {
   "name": "@anissoft/react-hooks",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Bunch of react hooks ",
   "keywords": [
     "react",
@@ -55,7 +55,10 @@
       "react-hooks.ts",
       "useTabFocus.ts",
       "useViewportSize.ts",
-      "useQueryParameter.ts"
+      "useQueryParameter.ts",
+      "useQueryParameters.ts",
+      "useDocumentCookie.ts",
+      "useDocumentCookies.ts"
     ],
     "coverageThreshold": {
       "global": {
@@ -87,5 +90,5 @@
     "ts-node": "9.1.1",
     "typescript": "4.2.4"
   },
-  "gitHead": "cf458867431d64fc36129774f5152c16ec77dc80"
+  "gitHead": "038ac7609828f2e5674f6782d5495e57a9a39b51"
 }
