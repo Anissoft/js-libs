@@ -1,17 +1,22 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 
-import { useDocumentCookies } from '../../packages/react-hooks/src/useDocumentCookies'
+import { clearLogs, logs, setLevel } from '../../packages/console/src/index'
 
 export default {
   title: 'cookies',
 } as Meta;
 
+(window as any).setLevel = setLevel;
+(window as any).clearLogs = clearLogs;
+(window as any).logs = logs;
+
 export const Sandbox: Story<any> = (({ }) => {
-  const [cookies, setCookie] = useDocumentCookies();
-
-  console.log(cookies, { setCookie });
-
+  React.useEffect(() => {
+    setTimeout(() => {
+      throw new Error('caught me')
+    }, 5000)
+  }, [])
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
 
