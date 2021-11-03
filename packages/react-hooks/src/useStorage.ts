@@ -52,6 +52,15 @@ Storage.prototype.clear = function () {
   }
 };
 
+const globalListener = (event: StorageEvent) => {
+  const key = event.key;
+  if (key && event.storageArea === storages['local'] && proxies['local'].value[key] !== event.newValue) {
+    proxies['local'].set((state) => ({ ...state, [key]: event.newValue }));
+  }
+};
+
+window.addEventListener('storage', globalListener);
+
 export function useStorage(storageType: keyof typeof storages, key: string, defaultValue?: string) {
   const valueInStorage = storages[storageType].getItem(key);
   const [value, setValue] = React.useState(valueInStorage === null && defaultValue !== undefined ? defaultValue : valueInStorage);
@@ -65,22 +74,13 @@ export function useStorage(storageType: keyof typeof storages, key: string, defa
       storages[storageType].setItem(key, defaultValue);
     }
 
-    const globalListener = (event: StorageEvent) => {
-      if (event.key === key && ref.current !== event.newValue) {
-        setValue(event.newValue);
-      }
-    };
-    const storageListener = (state: Record<string, string | null>) => {
+    const { unsubscribe } = proxies[storageType].subscribe((state: Record<string, string | null>) => {
       if (ref.current !== state[key]) {
         setValue(state[key]);
       }
-    };
-
-    window.addEventListener('storage', globalListener);
-    const { unsubscribe } = proxies[storageType].subscribe(storageListener);
+    });
 
     return () => {
-      window.removeEventListener('storage', globalListener);
       unsubscribe();
     };
   }, [key]);
