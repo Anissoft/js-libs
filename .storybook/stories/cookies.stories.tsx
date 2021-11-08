@@ -14,7 +14,7 @@ export default {
 export const Sandbox: Story<any> = (({ }) => {
   React.useEffect(() => {
     setTimeout(() => {
-      throw new Error('caught me')
+      Promise.reject('holla');
     }, 5000)
   }, [])
   return (

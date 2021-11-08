@@ -14,31 +14,7 @@ const originalMethods = {
   error: console.error,
 }
 
-export const logs: {
-  level: keyof typeof Level;
-  '@timestamp': number;
-  message: string;
-  data: string[];
-  stack: string;
-}[] = []
-
 let LEVEL = Level.verbose;
-
-export function setLevel(level: keyof typeof Level) {
-  if (Object.keys(Level).includes(level)) {
-    LEVEL = Level[level];
-  } else {
-    throw new Error(`Invalid value for level: ${level}`)
-  }
-}
-
-export function clearLogs() {
-  console.clear();
-  logs.forEach((item, index) => {
-    delete logs[logs.length - 1 - index];
-  });
-  logs.length = 0;
-}
 
 function prepeareLog(message: any, ...optionalParams: any[]) {
   return {
@@ -116,9 +92,39 @@ console.error = (error: any, ...optionalParams: any[]): void => {
 
 window.onunhandledrejection = event => {
   console.error(event);
-  // console.warn(`UNHANDLED PROMISE REJECTION: ${event.reason}`);
 };
 
 window.onerror = function (message, source, lineNumber, colno, error) {
   console.error(error || { message, source, lineNumber, colno });
 };
+
+
+export const logs: {
+  level: keyof typeof Level;
+  '@timestamp': number;
+  message: string;
+  data: string[];
+  stack: string;
+}[] = []
+
+
+export function setLevel(level: keyof typeof Level) {
+  if (Object.keys(Level).includes(level)) {
+    LEVEL = Level[level];
+  } else {
+    throw new Error(`Invalid value for level: ${level}`)
+  }
+}
+
+export function clearLogs() {
+  console.clear();
+  logs.forEach((item, index) => {
+    delete logs[logs.length - 1 - index];
+  });
+  logs.length = 0;
+}
+
+export async function flush(callback: (batch: typeof logs) => Promise<void>) {
+  await callback(logs);
+  clearLogs();
+}
