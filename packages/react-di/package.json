@@ -1,6 +1,6 @@
 {
   "name": "@anissoft/react-di",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Dependency injection for react applications, based on reflect-metadata",
   "keywords": [
     "react",
@@ -75,8 +75,8 @@
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
-    "react-dom": "^17.0.2",
-    "@testing-library/react": "^11.2.2"
+    "@testing-library/react": "^11.2.2",
+    "react-dom": "^17.0.2"
   },
   "gitHead": "3039d0e62facd7137f7e96177c002a8fa4abb61b"
 }
