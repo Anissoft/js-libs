@@ -35,7 +35,7 @@ export const If: React.FunctionComponent<{
   ) {
     return xc(condition) ? <>{children}</> : null;
   }
-  const options = Array.isArray(children) ? children : ([children] as React.ReactNodeArray);
+  const options = Array.isArray(children) ? children : [children];
   const thens = options.filter((child: any) => !elseTypes.includes((child || {}).type)) || null;
   const elses = options.filter((child: any) => !thenTypes.includes((child || {}).type)) || null;
 
