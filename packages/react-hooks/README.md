@@ -18,8 +18,8 @@ Shortway for 'didMount' property
 
 ```js
 import React from "react";
-import If from "@anissoft/react-helpers/components/If";
-import useMounted from "@anissoft/react-hooks/useMounted";
+import { If } from "@anissoft/react-conditions";
+import useMounted from "@anissoft/react-hooks";
 
 export default () => {
   const { mounted } = useMounted();
@@ -57,8 +57,7 @@ Allows to use querystring parameter from url as State in your component. This ho
 
 ```js
 import React from "react";
-import useQueryParameter from "@anissoft/react-hooks/useQueryParameter";
-import useQueryParameters from "@anissoft/react-hooks/useQueryParameters";
+import { useQueryParameter, useQueryParameters } from "@anissoft/react-hooks";
 
 export const Example = ({ selectedPage }) => {
   const [test, setTest] = useQueryParameter("test", "default-value");
@@ -128,8 +127,7 @@ Allows to use document cookies as react state
 
 ```js
 import React from "react";
-import useDocumentCookies from "@anissoft/react-hooks/useDocumentCookies";
-import useDocumentCookie from "@anissoft/react-hooks/useDocumentCookie";
+import { useDocumentCookies, useDocumentCookie} from "@anissoft/react-hooks";
 
 function Example() {
   const [cookies, setCookie] = useDocumentCookies();
@@ -165,7 +163,7 @@ Will subscribe corresponding callbacks for onblur and onfocus window events (eg.
 
 ```js
 import React from "react";
-import useTabFocus from "@anissoft/react-hooks/useTabFocus";
+import { useTabFocus } from "@anissoft/react-hooks";
 
 const Example = () => {
   useTabFocus(
@@ -189,7 +187,7 @@ Will execute callback on keydown events with all pressed keys and keycodes at th
 
 ```js
 import React from 'react';
-import useKeyboard from '@anissoft/react-hooks/useKeyboard';
+import { useKeyboard } from '@anissoft/react-hooks';
 
 const Example = () => {
   const [pressedKeys, setPressedKeys] = React.useState<string[]>([]);
@@ -219,7 +217,7 @@ Just like regular React.useState(), but will also sync state with corresponsing 
 
 ```js
 import React from "react";
-import { useLocalStorage } from "@anissoft/react-hooks/useStorage";
+import { useLocalStorage } from "@anissoft/react-hooks";
 
 const Example = () => {
   const [value, setValue] = useLocalStorage("key");
@@ -248,7 +246,7 @@ Allows you to access state and setState method with this hook in any place at yo
 
 ```js
 import React from "react";
-import { useSharedState, SharedStateProvider } from "@anissoft/react-hooks/useSharedState";
+import { useSharedState, SharedStateProvider } from "@anissoft/react-hooks";
 
 import { globalStateKey, globalDefaultState } from "./stateKeys";
 
@@ -277,7 +275,7 @@ Returns instance of Set, witch triggers component update on its changes (.add, .
 
 ```js
 import React from 'react'
-import useSet from '@anissoft/react-hooks/useSet'
+import { useSet } from '@anissoft/react-hooks'
 
 const Example = () => {
   const numbers = useSet([1,2,3]);
@@ -301,7 +299,7 @@ Debounce the [value] for [delay] (in ms)
 
 ```js
 import React from "react";
-import useDebouncedState from "@anissoft/react-hooks/useDebouncedState";
+import { useDebouncedState } from "@anissoft/react-hooks";
 
 const Example = ({ initial }) => {
   const [value, setValue] = useState(initial);
@@ -328,7 +326,7 @@ Throttle the [value] for [delay] (in ms)
 
 ```js
 import React from "react";
-import useThrottledState from "@anissoft/react-hooks/useThrottledState";
+import { useThrottledState } from "@anissoft/react-hooks";
 
 export default ({ initial }) => {
   const [value, setValue] = useState(initial);

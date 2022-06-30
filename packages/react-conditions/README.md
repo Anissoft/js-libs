@@ -17,7 +17,7 @@ $ npm install @anissoft/react-conditions
 ```js
 import * as React from 'react';
 import { render } from 'react-dom';
-import { If, Then, Else } from '@anissoft/react-conditions/If'
+import { If, Then, Else } from '@anissoft/react-conditions'
 
 import MainApp from 'Components/Main';
 import Error from 'Components/Error';
@@ -69,7 +69,7 @@ Conditional render like in < If />, but this time for wrapping components
 ```js
 import * as React from 'react';
 import { render } from 'react-dom';
-import { Wrapper } from '@anissoft/react-conditions/Wrapper'
+import { Wrapper } from '@anissoft/react-conditions'
 
 import MainApp from 'Components/Main';
 import MobleViewWrapper from 'Components/Mobile';
@@ -91,7 +91,7 @@ also, can be used with function `wrap` as wrapper
 ```js
 import * as React from 'react';
 import { render } from 'react-dom';
-import { Wrapper } from '@anissoft/react-conditions/Wrapper'
+import { Wrapper } from '@anissoft/react-conditions'
 
 import MainApp from 'Components/Main';
 import MobleViewWrapper from 'Components/Mobile';
@@ -119,7 +119,7 @@ Conditional render, but for several conditions. Simple implementation of javascr
 ```js
 import * as React from 'react';
 import { render } from 'react-dom';
-import { Switch, Case, Default } from '@anissoft/react-conditions/Switch'
+import { Switch, Case, Default } from '@anissoft/react-conditions'
 
 import AdminView from 'Components/Admin';
 import UserView from 'Components/User';
