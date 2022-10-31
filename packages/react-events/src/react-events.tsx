@@ -90,13 +90,13 @@ export const CustomEventScope = ({
   );
 }
 
-export const useAddCustomEventListener = () => {
-  return React.useContext(addListenerContext);
+export function useAddCustomEventListener<EventName extends string, Payload = any>() {
+  return React.useContext(addListenerContext) as (event: EventName, listener: CustomEventListener<Payload>) => void;
 }
 
-export function useCustomEventListener<T = any>(
-  event: CustomEventName,
-  listener: CustomEventListener<T>,
+export function useCustomEventListener<EventName extends string, Payload = any>(
+  event: EventName,
+  listener: CustomEventListener<Payload>,
   deps: React.DependencyList | undefined = [],
 ) {
   const addCustomEventListener = useAddCustomEventListener();
@@ -106,6 +106,6 @@ export function useCustomEventListener<T = any>(
   }, [event, addCustomEventListener, ...deps]);
 }
 
-export const useDispatchCustomEvent = () => {
-  return React.useContext(dispatchContext);
+export function useDispatchCustomEvent<EventName extends string, Payload = any>() {
+  return React.useContext(dispatchContext) as (event: EventName, payload: Payload) => void;
 }

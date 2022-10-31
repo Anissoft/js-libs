@@ -47,7 +47,7 @@ function Component() {
 }
 ```
 
-this is equivalent for:
+or it's equivalent:
 
 ```js
 import { useCustomEventListener } from "@anissoft/react-events";
