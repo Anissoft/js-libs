@@ -67,7 +67,7 @@ import request from "../request";
 
 #### isOk
 
-You can specify custom condition in RequestInit to define if response was ok:
+You can specify custom condition in RequestInit to define if response is _ok_:
 
 ```typescript
 request("https://example.com/api/method", {
@@ -100,7 +100,7 @@ request("https://example.com/api/method", {
 
 #### Sync .json() and .text() methods
 
-.json() and .text() methods contains preparsed data and can be executed synchronous multiple times:
+.json() and .text() methods contains preparsed data and can be executed synchronously multiple times:
 
 ```typescript
 const response = request("https://example.com/api/method");
@@ -144,7 +144,7 @@ request("https://example.com/api/method", {
 
 #### getParameterByName(name: string[, url: string])
 
-Returns the last value of query parameter from given url. If no url specified - will use global location.href from browser, or qmpty string in nodeJs.
+Returns the last value of query parameter from given url. If no url specified - will use global location.href in browser, or empty string in NodeJS.
 
 ```typescript
 const { getParameterByName } = require("@anissoft/request");
@@ -155,7 +155,7 @@ console.log(search); // '123';
 
 ## Author
 
-👤 \*\*Alexey Anisimov
+👤 **Alexey Anisimov**
 
 - Github: [@Anissoft](https://github.com/Anissoft)
 

@@ -1,6 +1,6 @@
 {
   "name": "@anissoft/state",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Tiny and fast library for observable state management",
   "keywords": [
     "javascript",
@@ -8,7 +8,7 @@
     "state"
   ],
   "author": "Alexey <Anisimov>",
-  "homepage": "https://github.com/Anissoft/js-libs#readme",
+  "homepage": "https://github.com/Anissoft/js-libs/tree/master/packages/state#readme",
   "publishConfig": {
     "access": "public"
   },

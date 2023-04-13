@@ -1,6 +1,6 @@
 {
   "name": "@anissoft/request",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Wrap on top of the standart fetch API with few tweaks",
   "keywords": [
     "fetch",
@@ -9,7 +9,7 @@
     "ajax"
   ],
   "author": "Alexey <Anisimov>",
-  "homepage": "https://github.com/Anissoft/js-libs#readme",
+  "homepage": "https://github.com/Anissoft/js-libs/tree/master/packages/request#readme",
   "license": "MIT",
   "typings": "lib/index",
   "main": "lib/index.js",

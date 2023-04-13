@@ -80,7 +80,7 @@ function Component() {
 }
 ```
 
-If you are using nested CustomScopes, you can isolate some of them - just pass prop _isolate=true_:
+If you are using nested CustomScopes, you can isolate any of them - just pass prop _isolate=true_:
 
 ```js
   <CustomEventScope>

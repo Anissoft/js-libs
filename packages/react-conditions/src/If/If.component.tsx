@@ -16,7 +16,7 @@ export const Else = ({ children }: { children?: (() => React.ReactNode) | React.
 export const If: React.FunctionComponent<{
   condition: boolean | (() => boolean);
 }> = ({ condition, children }) => {
-  if (!children || children === null) {
+  if (!children) {
     return null;
   }
 
@@ -35,6 +35,7 @@ export const If: React.FunctionComponent<{
   ) {
     return xc(condition) ? <>{children}</> : null;
   }
+
   const options = Array.isArray(children) ? children : [children];
   const thens = options.filter((child: any) => !elseTypes.includes((child || {}).type)) || null;
   const elses = options.filter((child: any) => !thenTypes.includes((child || {}).type)) || null;
@@ -45,9 +46,11 @@ export const If: React.FunctionComponent<{
     }
     return thens[0];
   }
+
   if (elses && elses.length > 1) {
     return <>{elses}</>;
   }
+  
   return elses[0];
 };
 

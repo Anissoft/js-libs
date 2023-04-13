@@ -1,6 +1,6 @@
 # React Hooks
 
-Just bunch of hooks, that I commonly use in my code
+Bunch of hooks for React
 
 ## Installation
 
@@ -25,7 +25,7 @@ export default () => {
   const { mounted } = useMounted();
 
   return (
-    <div>{mounted ? <p>Component just renders</p> : <p>Component was rendered before</p>}</div>
+    <div>{!mounted ? <p>Component is rendering first time</p> : <p>Component was rendered before</p>}</div>
   );
 };
 ```

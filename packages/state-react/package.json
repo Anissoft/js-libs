@@ -1,6 +1,6 @@
 {
   "name": "@anissoft/state-react",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "React integration of @anissoft/state",
   "keywords": [
     "state",
@@ -8,7 +8,7 @@
     "hook"
   ],
   "author": "Alexey <Anisimov>",
-  "homepage": "https://github.com/Anissoft/js-libs#readme",
+  "homepage": "https://github.com/Anissoft/js-libs/tree/master/packages/react-state#readme",
   "publishConfig": {
     "access": "public"
   },

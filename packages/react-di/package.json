@@ -1,6 +1,6 @@
 {
   "name": "@anissoft/react-di",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Dependency injection for react applications, based on reflect-metadata",
   "keywords": [
     "react",
@@ -9,7 +9,7 @@
     "container"
   ],
   "author": "Alexey <Anisimov>",
-  "homepage": "https://github.com/Anissoft/js-libs#readme",
+  "homepage": "https://github.com/Anissoft/js-libs/tree/master/packages/react-di#readme",
   "publishConfig": {
     "access": "public"
   },

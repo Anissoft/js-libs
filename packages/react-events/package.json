@@ -1,13 +1,13 @@
 {
   "name": "@anissoft/react-events",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Easy to use event emitters and listeners",
   "keywords": [
     "react",
     "events"
   ],
   "author": "alexey anisimov <anissoftkun@gmail.com>",
-  "homepage": "https://github.com/Anissoft/js-libs#readme",
+  "homepage": "https://github.com/Anissoft/js-libs/tree/master/packages/react-events#readme",
   "publishConfig": {
     "access": "public"
   },

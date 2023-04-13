@@ -1,6 +1,6 @@
 # Welcome to @anissoft/react-di 👋
 
-> My attempt to make inversion of control solution for React apps with Reflect metadata and Typescript;
+> My attempt to make inversion-of-control for React apps with Reflect Metadata and Typescript;
 
 ## Install
 

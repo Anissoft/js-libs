@@ -1,13 +1,13 @@
 {
   "name": "@anissoft/react-conditions",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Conditional rendering for react",
   "keywords": [
     "react",
     "if"
   ],
   "author": "Alexey <Anisimov>",
-  "homepage": "https://github.com/Anissoft/js-libs#readme",
+  "homepage": "https://github.com/Anissoft/js-libs/tree/master/packages/react-conditions#readme",
   "publishConfig": {
     "access": "public"
   },
