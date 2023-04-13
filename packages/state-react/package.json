@@ -1,6 +1,6 @@
 {
   "name": "@anissoft/state-react",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "React integration of @anissoft/state",
   "keywords": [
     "state",
