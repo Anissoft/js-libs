@@ -8,7 +8,7 @@
     "hook"
   ],
   "author": "Alexey <Anisimov>",
-  "homepage": "https://github.com/Anissoft/js-libs/tree/master/packages/react-state#readme",
+  "homepage": "https://github.com/Anissoft/js-libs/tree/master/packages/state-react#readme",
   "publishConfig": {
     "access": "public"
   },
