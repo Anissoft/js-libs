@@ -1,6 +1,6 @@
 {
   "name": "@anissoft/react-di",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Dependency injection for react applications, based on reflect-metadata",
   "keywords": [
     "react",

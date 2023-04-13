@@ -1,6 +1,6 @@
 {
   "name": "@anissoft/state-react",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "React integration of @anissoft/state",
   "keywords": [
     "state",
@@ -69,7 +69,7 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@anissoft/state": "^1.0.4"
+    "@anissoft/state": "^1.0.7"
   },
   "gitHead": "32dff233758cfa66cc57a55f374e16e7664c2d16"
 }
